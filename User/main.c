@@ -13,10 +13,11 @@
 #define BIT_VALUE(val, bit) ((val & (0x0001 << bit)) >> bit)
 #define STAND_NUM 16
 
+#define AMP_START_ADR 0
+#define AMP_ACT_ADR 40
+
 short wReg[200];
 short coils[200];
-
-extern u8 bSaved;
 
 short Zero[3] = {17, 60, 19};
 int nStandard[4][STAND_NUM] = {
@@ -25,42 +26,36 @@ int nStandard[4][STAND_NUM] = {
 	{0, 43, 212, 368, 521, 686, 797, 988, 1125, 1187, 1270, 1316, 1366, 1410, 1475, 1502},
 	{0, 44, 212, 367, 519, 682, 794, 977, 1114, 1176, 1257, 1302, 1351, 1394, 1421, 1437}};
 
-static void
-Handle_Effect(void);
+static void Handle_Effect(void);
+
 //--------------------------------------------------------------------------------
 int main(void)
 {
-	int n;
-
 	SysTick_Init();
 
 	LED_GPIO_Config();
 	Modbus_init();
 	SBG_Init();
 	ADC1_Init();
-
-	InternalFlashRead(wReg, 200);
-	wReg[110]++; // 启动次数加1
-	bSaved = 1;
-	for (n = 10; n < 16; n++)
-		wReg[n] = 0;
+	LED1_ON;
 
 	SetTimer(1, 200);
-	SetTimer(2, 100);
+	SetTimer(2, 500);
+	SetTimer(4, 200);
 	SetTimer(3, 1000);
 
-	//IWDG_Configuration() ;
-	LED1_OFF;
+	IWDG_Configuration();
+
 	while (1)
 	{
 		Modbus_task();
-		//SBG_Task() ;
+		SBG_Task();
 
 		//-----------------------------------------------------------------
 		if (GetTimer(1))
 		{
-			OutputDigital();
-			InputDigital();
+			//OutputDigital();
+			//InputDigital();
 		}
 
 		//------------------------------------------------------------------
@@ -68,17 +63,17 @@ int main(void)
 		{
 			LED1_TOGGLE;
 			IWDG_Feed();
-			if (bEffectHandle)
-			{
-				Handle_Effect();
-				bEffectHandle = 0;
-			}
 		}
 
-		if (GetTimer(3) && bSaved)
+		if (GetTimer(3))
 		{
-			InternalFlashWrite(wReg, 200);
-			bSaved = 0;
+			Modbus_SavePara();
+		}
+
+		if (GetTimer(4) && bEffectHandle)
+		{
+			Handle_Effect();
+			bEffectHandle = 0;
 		}
 	}
 }
@@ -96,6 +91,7 @@ static void Handle_Effect(void)
 	int nDeltaAmp = 0;
 	int nLastDig = 0;
 	int nVal = 0;
+	short *ptrVal, *ptrAmp, tmp;
 
 	pData = wGraph;
 	for (i = 0; i < CYCLE_LEN; i++)
@@ -107,15 +103,17 @@ static void Handle_Effect(void)
 		}
 	}
 
+	ptrVal = mblock1.ptrRegs + AMP_ACT_ADR;
+	ptrAmp = mblock1.ptrRegs + AMP_START_ADR;
 	for (i = 0; i < 3; i++)
 	{
-		wReg[40 + i] = lEff[i] / CYCLE_LEN - Zero[i]; //Effective value is square root
-		if (wReg[40 + i] < 0)
-			wReg[40 + i] = 0;
+		tmp = lEff[i] / CYCLE_LEN - Zero[i]; //Effective value is square root
+		if (tmp < 0)
+			tmp = 0;
 
 		for (j = 1; j < STAND_NUM; j++)
 		{
-			if (wReg[40 + i] < nStandard[i + 1][j] && wReg[40 + i] >= nStandard[i + 1][j - 1])
+			if (tmp < nStandard[i + 1][j] && tmp >= nStandard[i + 1][j - 1])
 				break;
 		}
 
@@ -133,7 +131,10 @@ static void Handle_Effect(void)
 			nVal = nStandard[0][j - 1];
 			nLastDig = nStandard[i + 1][j - 1];
 		}
-		nVal += (wReg[40 + i] - nLastDig) * nDeltaAmp / nDeltaDig;
-		wReg[i] = (short)(nVal/100);
+		nVal += (tmp - nLastDig) * nDeltaAmp / nDeltaDig;
+		*ptrAmp = (short)(nVal / 100);
+		*ptrVal = tmp;
+		ptrAmp++;
+		ptrVal++;
 	}
 }

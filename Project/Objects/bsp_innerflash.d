@@ -2,7 +2,7 @@
 .\objects\bsp_innerflash.o: ..\Bsp\bsp_innerflash.h
 .\objects\bsp_innerflash.o: ..\Libraries\CMSIS\stm32f10x.h
 .\objects\bsp_innerflash.o: ..\Libraries\CMSIS\core_cm3.h
-.\objects\bsp_innerflash.o: D:\Program\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\bsp_innerflash.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\bsp_innerflash.o: ..\Libraries\CMSIS\system_stm32f10x.h
 .\objects\bsp_innerflash.o: ..\User\stm32f10x_conf.h
 .\objects\bsp_innerflash.o: ..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h

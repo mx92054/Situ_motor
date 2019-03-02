@@ -1,7 +1,7 @@
 .\objects\main.o: ..\User\main.c
 .\objects\main.o: ..\Libraries\CMSIS\stm32f10x.h
 .\objects\main.o: ..\Libraries\CMSIS\core_cm3.h
-.\objects\main.o: D:\Program\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\main.o: ..\Libraries\CMSIS\system_stm32f10x.h
 .\objects\main.o: ..\User\stm32f10x_conf.h
 .\objects\main.o: ..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h
@@ -28,12 +28,12 @@
 .\objects\main.o: ..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\main.o: ..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h
 .\objects\main.o: ..\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
-.\objects\main.o: D:\Program\Keil\ARM\ARMCC\Bin\..\include\math.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\main.o: ..\User\..\bsp\bsp_led.h
 .\objects\main.o: ..\User\..\bsp\SysTick.h
 .\objects\main.o: ..\User\..\bsp\bsp_exti.h
 .\objects\main.o: ..\User\..\bsp\bsp_innerflash.h
 .\objects\main.o: ..\User\..\bsp\adc.h
 .\objects\main.o: ..\User\modbus_svr.h
-.\objects\main.o: D:\Program\Keil\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: ..\User\Mbsvr_comm.h
 .\objects\main.o: ..\User\SBG_Comm.h

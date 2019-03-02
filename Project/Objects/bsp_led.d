@@ -2,7 +2,7 @@
 .\objects\bsp_led.o: ..\Bsp\bsp_led.h
 .\objects\bsp_led.o: ..\Libraries\CMSIS\stm32f10x.h
 .\objects\bsp_led.o: ..\Libraries\CMSIS\core_cm3.h
-.\objects\bsp_led.o: D:\Program\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\bsp_led.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\bsp_led.o: ..\Libraries\CMSIS\system_stm32f10x.h
 .\objects\bsp_led.o: ..\User\stm32f10x_conf.h
 .\objects\bsp_led.o: ..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h
@@ -29,3 +29,5 @@
 .\objects\bsp_led.o: ..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\bsp_led.o: ..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h
 .\objects\bsp_led.o: ..\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
+.\objects\bsp_led.o: ..\Bsp\..\User\Modbus_svr.h
+.\objects\bsp_led.o: ..\Bsp\..\User\Mbsvr_comm.h

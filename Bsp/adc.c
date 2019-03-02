@@ -171,7 +171,6 @@ void DMA1_Channel1_IRQHandler(void)
 		{
 			memcpy((void*)wGraph,(void*)ADC_ConvertedValue,CYCLE_LEN*3*2) ;
 			bEffectHandle = 1 ;
-			wReg[16]++ ;
 		}
 	} 	
 }
