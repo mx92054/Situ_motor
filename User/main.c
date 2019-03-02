@@ -138,9 +138,7 @@ static void Handle_Effect(void)
 			nLastDig = nStandard[i + 1][j - 1];
 		}
 		nVal += (tmp - nLastDig) * nDeltaAmp / nDeltaDig;
-		*ptrAmp = (short)(nVal / 100);
-		*ptrVal = tmp;
-		ptrAmp++;
-		ptrVal++;
+		*ptrAmp++ = (short)(nVal / 100);
+		*ptrVal++ = tmp;
 	}
 }
