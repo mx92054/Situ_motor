@@ -1,3 +1,10 @@
+/***************************************************
+ * Copyright (C),2019 www.idsse.ac.cn
+ * Written by chenming
+ * Version 1.0
+ * Data  2019-3-3
+ * Description: modbus服务程序公用库头文件
+ * *************************************************/
 #ifndef __MBSVR_H__
 #define __MBSVR_H__
 
@@ -5,46 +12,37 @@
 
 #define MB_STATION 90
 #define MB_BAUDRATE 91
-#define MB_TICK 92
+#define MB_BOOTNUM 92
 #define MB_COILSTARTADR 93
 #define MB_COILLEN 94
 #define MB_REGSTARTADR 95
 #define MB_REGLEN 96
 #define MB_INPUTSTARTADR 97
 #define MB_INPUTLEN 98
-#define MB_BOOTNUM 99
+#define MB_TICK 99
 
-#define REG_LEN 200
-#define COIL_LEN 200
 #define BIT2BYTE(n) ((((n)&0x0007) == 0) ? ((n) >> 3) : (((n) >> 3) + 1))
-#define SETBIT_BYTE(n, bit) ((n) | (0x01 << (bit)))
-#define RESETBIT_BYTE(n, bit) ((n) & (~(0x01 << (bit))))
 #define GETBIT_BYTE(n, bit) (((n) >> (bit)) & 0x01)
 
 typedef struct tag_ModbusModule
 {
-    int SaveNo ;
-    int baudrate;
-    short station;
+    int baudrate;  //通信波特率
+    short station; //本modbus口站地址
 
-    short wReg[REG_LEN];   //保持存储器
-    short coils[COIL_LEN]; //继电器存储器
+    int uCoilStartAdr; //线圈起始地址
+    int uCoilLen;      //线圈数目
+    int uCoilEndAdr;   //线圈结束地址
+    short *ptrCoils;   //保持线圈的地方
 
-    int uCoilStartAdr ;
-    int uCoilLen;  //线圈数目
-    int uCoilEndAdr ;
-    short *ptrCoils; //保持线圈的地方  
-    
-    int uRomStartAdr ;
-    int uRomLen;   //只读寄存器长度
-    int uRomEndAdr ;
-    short *ptrRoms;  //只读寄存器的地方
+    int uRomStartAdr; //只读存储器起始地址
+    int uRomLen;      //只读寄存器长度
+    int uRomEndAdr;   //只读存储器接收地址
+    short *ptrRoms;   //只读寄存器的地方
 
-    int uRegStartAdr ;
-    int uRegLen;   //保持寄存器长度
-    int uRegEndAdr ;
-    short *ptrRegs;  //保持寄存器的地方
-
+    int uRegStartAdr; //保持寄存器起始地址
+    int uRegLen;      //保持寄存器长度
+    int uRegEndAdr;   //保持寄存器结束地址
+    short *ptrRegs;   //保持寄存器的地方
 
     u8 buffer[512]; //缓冲区
     u8 *tsk_buf;    //处理程序缓冲
@@ -57,10 +55,9 @@ typedef struct tag_ModbusModule
     u8 uFrameInterval;    //帧间隙
     u8 errno;             //当前错误代号
     __IO u16 nMBInterval; //接受字符间隙计数器
-    u8 bSaved;
-    u32 uLTick; //上一次接收成功的tick值
+    u8 bSaved;            //寄存器改动保存标志
+    u32 uLTick;           //上一次接收成功的tick值
 } Modbus_block;
-
 
 //----------------------------------------------------------------------------------
 void ModbusSvr_block_init(Modbus_block *pblk); //初始化

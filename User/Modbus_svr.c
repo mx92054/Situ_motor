@@ -1,3 +1,11 @@
+/***************************************************
+ * Copyright (C),2019 www.idsse.ac.cn
+ * Written by chenming
+ * Version 1.0
+ * Data  2019-3-3
+ * Description: modbus接口实现文件
+ * *************************************************/
+
 #include <stdio.h>
 #include "Modbus_svr.h"
 #include "..\bsp\bsp_led.h"

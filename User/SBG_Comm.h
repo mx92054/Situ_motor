@@ -1,3 +1,10 @@
+/***************************************************
+ * Copyright (C),2019 www.idsse.ac.cn
+ * Written by chenming
+ * Version 1.0
+ * Data  2019-3-3
+ * Description: SBG姿态模块通信头文件
+ * *************************************************/
 #ifndef __SBG_COMM__
 #define __SBG_COMM__
 

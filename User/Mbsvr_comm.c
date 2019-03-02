@@ -1,3 +1,10 @@
+/***************************************************
+ * Copyright (C),2019 www.idsse.ac.cn
+ * Written by chenming
+ * Version 1.0
+ * Data  2019-3-3
+ * Description: modbus服务程序公用库实现文件
+ * *************************************************/
 #include "Mbsvr_comm.h"
 #include "..\bsp\bsp_innerflash.h"
 #include "..\bsp\SysTick.h"
@@ -188,9 +195,9 @@ void ModbusSvr_task(Modbus_block *pblk, USART_TypeDef *pUSARTx)
             else //occur finish
             {
                 ModbusSvr_normal_respose(pblk, pUSARTx);
-                pblk->ptrRegs[pblk->uRegLen - 1] = tick - pblk->uLTick;
-                pblk->uLTick = tick;
             }
+            pblk->ptrRegs[pblk->uRegLen - 1] = tick - pblk->uLTick;
+            pblk->uLTick = tick;
         }
         pblk->nMBInterval = 0;
     }
@@ -244,9 +251,9 @@ u8 ModbusSvr_procotol_chain(Modbus_block *pblk)
         for (i = 0; i < data_len; i++)
         {
             if (pblk->ptrCoils[cur_adr])
-                *ptr = SETBIT_BYTE(*ptr, cur_bit);
+                *ptr |= 0x01 << cur_bit;
             else
-                *ptr = RESETBIT_BYTE(*ptr, cur_bit);
+                *ptr &= ~(0x01 << cur_bit);
 
             if (++cur_bit >= 8)
             {
@@ -263,6 +270,8 @@ u8 ModbusSvr_procotol_chain(Modbus_block *pblk)
     if (tsk_buf[1] == 5)
     {
         if (reg_adr < pblk->uCoilStartAdr)
+            return 2; //ILLEGAL DATA ADDRESS
+        if (reg_adr >= pblk->uCoilEndAdr)
             return 2; //ILLEGAL DATA ADDRESS
 
         if (data_len == 0xFF00)
@@ -350,8 +359,11 @@ u8 ModbusSvr_procotol_chain(Modbus_block *pblk)
     {
         if (reg_adr < pblk->uRegStartAdr)
             return 2; //ILLEGAL DATA ADDRESS
+        if ( reg_adr >= pblk->uRegEndAdr)
+            return 2; //ILLEGAL DATA ADDRESS
 
         pblk->ptrRegs[reg_adr - pblk->uRegStartAdr] = data_len;
+        
         pblk->bSaved = 1;
         pblk->trans_len = 8;
         return 0;
@@ -373,6 +385,7 @@ u8 ModbusSvr_procotol_chain(Modbus_block *pblk)
             *ptrReg |= (*ptr++);
             ptrReg++;
         }
+
         pblk->bSaved = 1;
         pblk->trans_len = 8;
         return 0;
@@ -424,12 +437,12 @@ void ModbusSvr_isr(Modbus_block *pblk, USART_TypeDef *pUSARTx)
     }
 }
 
-//-------------------------------------------------------------------------------
-//	@brief	MODBUS CRC16计算程序
-//	@param	nData:需要计算的数据帧地址
-//					wLength: 需要计算的数据帧长度
-//	@retval	计算结果
-//-------------------------------------------------------------------------------
+/*-------------------------------------------------------------------------------
+ *	@brief	MODBUS CRC16计算程序
+ *	@param	nData:需要计算的数据帧地址
+ *					wLength: 需要计算的数据帧长度
+ *	@retval	计算结果
+ *----------------------------------------------------------------------------*/
 static const uint16_t wCRCTable[] = {
     0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
     0XC601, 0X06C0, 0X0780, 0XC741, 0X0500, 0XC5C1, 0XC481, 0X0440,
@@ -463,7 +476,6 @@ static const uint16_t wCRCTable[] = {
     0X4E00, 0X8EC1, 0X8F81, 0X4F40, 0X8D01, 0X4DC0, 0X4C80, 0X8C41,
     0X4400, 0X84C1, 0X8581, 0X4540, 0X8701, 0X47C0, 0X4680, 0X8641,
     0X8201, 0X42C0, 0X4380, 0X8341, 0X4100, 0X81C1, 0X8081, 0X4040};
-
 u16 CRC16(const uint8_t *nData, uint8_t wLength)
 {
     uint8_t nTemp;
@@ -493,7 +505,7 @@ void Usart_SendByte(USART_TypeDef *pUSARTx, uint8_t ch)
 }
 
 //-------------------------------------------------------------------------------
-//	@brief	发送一个字节
+//	@brief	发送多个字节
 //	@param	pUSARTx:发送端口号
 //					ch: 待发送的字节
 //	@retval	None

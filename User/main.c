@@ -1,5 +1,11 @@
+/***************************************************
+ * Copyright (C),2019 www.idsse.ac.cn
+ * Written by chenming
+ * Version 1.0
+ * Data  2019-3-3
+ * Description: Ö÷³ÌÐò
+ * *************************************************/
 #include "stm32f10x.h"
-#include <math.h>
 
 #include "..\bsp\bsp_led.h"
 #include "..\bsp\SysTick.h"

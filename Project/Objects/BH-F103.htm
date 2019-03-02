@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\BH-F103.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\BH-F103.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Sat Mar 02 20:34:29 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Sun Mar 03 07:42:50 2019
 <BR><P>
 <H3>Maximum Stack Usage =        332 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -665,7 +665,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MODBUS_Config
 </UL>
 
-<P><STRONG><a name="[86]"></a>ModbusSvr_block_init</STRONG> (Thumb, 590 bytes, Stack size 208 bytes, mbsvr_comm.o(i.ModbusSvr_block_init))
+<P><STRONG><a name="[86]"></a>ModbusSvr_block_init</STRONG> (Thumb, 554 bytes, Stack size 208 bytes, mbsvr_comm.o(i.ModbusSvr_block_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 228<LI>Call Chain = ModbusSvr_block_init &rArr; malloc
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
@@ -685,7 +685,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
 </UL>
 
-<P><STRONG><a name="[90]"></a>ModbusSvr_procotol_chain</STRONG> (Thumb, 914 bytes, Stack size 48 bytes, mbsvr_comm.o(i.ModbusSvr_procotol_chain))
+<P><STRONG><a name="[90]"></a>ModbusSvr_procotol_chain</STRONG> (Thumb, 880 bytes, Stack size 48 bytes, mbsvr_comm.o(i.ModbusSvr_procotol_chain))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = ModbusSvr_procotol_chain &rArr; CRC16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CRC16
@@ -693,7 +693,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ModbusSvr_task
 </UL>
 
-<P><STRONG><a name="[91]"></a>ModbusSvr_save_para</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, mbsvr_comm.o(i.ModbusSvr_save_para))
+<P><STRONG><a name="[91]"></a>ModbusSvr_save_para</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, mbsvr_comm.o(i.ModbusSvr_save_para))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = ModbusSvr_save_para &rArr; InternalFlashWrite &rArr; FLASH_ProgramWord &rArr; FLASH_WaitForLastOperation
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InternalFlashWrite
@@ -701,7 +701,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Modbus_SavePara
 </UL>
 
-<P><STRONG><a name="[92]"></a>ModbusSvr_task</STRONG> (Thumb, 144 bytes, Stack size 24 bytes, mbsvr_comm.o(i.ModbusSvr_task))
+<P><STRONG><a name="[92]"></a>ModbusSvr_task</STRONG> (Thumb, 140 bytes, Stack size 24 bytes, mbsvr_comm.o(i.ModbusSvr_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = ModbusSvr_task &rArr; ModbusSvr_procotol_chain &rArr; CRC16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetCurTick
@@ -724,7 +724,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[95]"></a>Modbus_init</STRONG> (Thumb, 124 bytes, Stack size 104 bytes, modbus_svr.o(i.Modbus_init))
+<P><STRONG><a name="[95]"></a>Modbus_init</STRONG> (Thumb, 112 bytes, Stack size 104 bytes, modbus_svr.o(i.Modbus_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 332<LI>Call Chain = Modbus_init &rArr; ModbusSvr_block_init &rArr; malloc
 </UL>
 <BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
@@ -1042,7 +1042,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Modbus_init
 </UL>
 
-<P><STRONG><a name="[99]"></a>SBGDataProcess1</STRONG> (Thumb, 258 bytes, Stack size 48 bytes, sbg_comm.o(i.SBGDataProcess1))
+<P><STRONG><a name="[99]"></a>SBGDataProcess1</STRONG> (Thumb, 250 bytes, Stack size 48 bytes, sbg_comm.o(i.SBGDataProcess1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = SBGDataProcess1 &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2iz
@@ -1055,7 +1055,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SBG_Task
 </UL>
 
-<P><STRONG><a name="[9d]"></a>SBGDataProcess2</STRONG> (Thumb, 416 bytes, Stack size 40 bytes, sbg_comm.o(i.SBGDataProcess2))
+<P><STRONG><a name="[9d]"></a>SBGDataProcess2</STRONG> (Thumb, 402 bytes, Stack size 40 bytes, sbg_comm.o(i.SBGDataProcess2))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = SBGDataProcess2 &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2uiz

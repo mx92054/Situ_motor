@@ -1,11 +1,10 @@
-/**
-  ******************************************************************************
-  * @file    bsp_led.c
-  * @version V1.0
-  * @date    2013-xx-xx
-  * @brief   led应用函数接口
-  */
-
+/***************************************************
+ * Copyright (C),2019 www.idsse.ac.cn
+ * Written by chenming
+ * Version 1.0
+ * Data  2019-3-3
+ * Description: DI/DO实现程序
+ * *************************************************/
 #include "bsp_led.h"
 #include "..\User\Modbus_svr.h"
 
