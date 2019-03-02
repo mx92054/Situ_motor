@@ -1,4 +1,4 @@
-#include "stm32f10x.h"   
+#include "stm32f10x.h"
 #include <math.h>
 
 #include "..\bsp\bsp_led.h"
@@ -10,71 +10,77 @@
 #include "modbus_svr.h"
 #include "SBG_Comm.h"
 
-#define BIT_VALUE(val,bit)    ((val & (0x0001 << bit)) >> bit)
+#define BIT_VALUE(val, bit) ((val & (0x0001 << bit)) >> bit)
+#define STAND_NUM 16
 
-short wReg[200] ;
-short coils[200] ;
+short wReg[200];
+short coils[200];
 
-extern u8 bSaved ;
+extern u8 bSaved;
 
-static void Handle_Effect(void) ;
+short Zero[3] = {17, 60, 19};
+int nStandard[4][STAND_NUM] = {
+	{0, 138, 677, 1150, 1655, 2173, 2529, 3086, 3707, 4083, 4695, 5100, 5612, 6106, 6575, 7080},
+	{0, 44, 214, 370, 524, 690, 801, 988, 1129, 1192, 1274, 1320, 1370, 1417, 1483, 1509},
+	{0, 43, 212, 368, 521, 686, 797, 988, 1125, 1187, 1270, 1316, 1366, 1410, 1475, 1502},
+	{0, 44, 212, 367, 519, 682, 794, 977, 1114, 1176, 1257, 1302, 1351, 1394, 1421, 1437}};
+
+static void
+Handle_Effect(void);
 //--------------------------------------------------------------------------------
 int main(void)
 {
-	int n ;
-	
-	SysTick_Init() ;
-	
-	LED_GPIO_Config() ;
-	Modbus_init() ;
-	SBG_Init() ;
-	ADC1_Init() ;
-	
-	InternalFlashRead(wReg, 200) ;
-	wReg[110]++ ;			// 启动次数加1
-	bSaved = 1 ;	
-	for(n = 10 ; n < 16 ; n++)
-		wReg[n] = 0 ;
+	int n;
 
-	SetTimer(1,200) ;
-	SetTimer(2,500) ;
-	SetTimer(3,1000) ;
-	
+	SysTick_Init();
+
+	LED_GPIO_Config();
+	Modbus_init();
+	SBG_Init();
+	ADC1_Init();
+
+	InternalFlashRead(wReg, 200);
+	wReg[110]++; // 启动次数加1
+	bSaved = 1;
+	for (n = 10; n < 16; n++)
+		wReg[n] = 0;
+
+	SetTimer(1, 200);
+	SetTimer(2, 100);
+	SetTimer(3, 1000);
+
 	//IWDG_Configuration() ;
-	LED1_OFF ;
-	while(1)
+	LED1_OFF;
+	while (1)
 	{
-		Modbus_task() ;
+		Modbus_task();
 		//SBG_Task() ;
-		
+
 		//-----------------------------------------------------------------
-		if ( GetTimer(1) )	
+		if (GetTimer(1))
 		{
-			OutputDigital() ;
-			InputDigital() ;			
-		}		
-		
+			OutputDigital();
+			InputDigital();
+		}
+
 		//------------------------------------------------------------------
-		if ( GetTimer(2) )
+		if (GetTimer(2))
 		{
-			LED1_TOGGLE ;
-			IWDG_Feed() ;
-			if ( bEffectHandle )
+			LED1_TOGGLE;
+			IWDG_Feed();
+			if (bEffectHandle)
 			{
-				//Handle_Effect() ;
-				wReg[0] = wGraph[0];
-				wReg[1] = wGraph[1];
-				wReg[2] = wGraph[2];
-				bEffectHandle = 0 ;
+				Handle_Effect();
+				bEffectHandle = 0;
 			}
 		}
-		
-		if ( GetTimer(3) && bSaved )
+
+		if (GetTimer(3) && bSaved)
 		{
-			InternalFlashWrite(wReg, 200) ;
-			bSaved = 0 ;
+			InternalFlashWrite(wReg, 200);
+			bSaved = 0;
 		}
-	}	
+	}
 }
 
 //--------------------------------------------------------------
@@ -83,38 +89,51 @@ int main(void)
 //wReg[20] - Middle Value of voltage
 static void Handle_Effect(void)
 {
-	uint16_t 	i,j ;
-	uint16_t  *pData,Temp ;
-	uint32_t	lEff[3] ;					//Effective value : sum of square
+	uint16_t i, j;
+	uint16_t *pData, Temp;
+	uint32_t lEff[3] = {0, 0, 0}; //Effective value : sum of square
+	int nDeltaDig = 1;
+	int nDeltaAmp = 0;
+	int nLastDig = 0;
+	int nVal = 0;
 
-	for(i = 0 ; i < 3 ; i++)
+	pData = wGraph;
+	for (i = 0; i < CYCLE_LEN; i++)
 	{
-		lEff[i] = 0 ;
-	}	
-	
-	pData = wGraph ;	
-	for(i = 0 ; i < 120 ; i++)
-	{
-		for( j = 0 ; j < 3 ; j++)
+		for (j = 0; j < 3; j++)
 		{
-			Temp = *pData++ ;
-//			if ( Temp > wReg[20 + j] ) 
-//				Temp -= wReg[20 + j] ;
-//			else
-//				Temp = wReg[20 + j] - Temp ;
-		
-			lEff[j] += Temp*Temp ;
+			Temp = *pData++;
+			lEff[j] += Temp;
 		}
-	}	
-	
-	for(i = 0 ; i < 3 ; i++)
-	{
-		wReg[i] = (short)sqrt(lEff[i]/120) ;		//Effective value is square root
 	}
-	
-	for(i = 2 ; i < 122 ; i += 3)
-		wReg[i/3 + 31] = wGraph[i] ;
+
+	for (i = 0; i < 3; i++)
+	{
+		wReg[40 + i] = lEff[i] / CYCLE_LEN - Zero[i]; //Effective value is square root
+		if (wReg[40 + i] < 0)
+			wReg[40 + i] = 0;
+
+		for (j = 1; j < STAND_NUM; j++)
+		{
+			if (wReg[40 + i] < nStandard[i + 1][j] && wReg[40 + i] >= nStandard[i + 1][j - 1])
+				break;
+		}
+
+		if (j >= STAND_NUM)
+		{
+			nDeltaDig = 1;
+			nDeltaAmp = 0;
+			nVal = nStandard[0][STAND_NUM - 1];
+			nLastDig = nStandard[i + 1][STAND_NUM - 1];
+		}
+		else
+		{
+			nDeltaDig = nStandard[i + 1][j] - nStandard[i + 1][j - 1];
+			nDeltaAmp = nStandard[0][j] - nStandard[0][j - 1];
+			nVal = nStandard[0][j - 1];
+			nLastDig = nStandard[i + 1][j - 1];
+		}
+		nVal += (wReg[40 + i] - nLastDig) * nDeltaAmp / nDeltaDig;
+		wReg[i] = (short)(nVal/100);
+	}
 }
-
-
-

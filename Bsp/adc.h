@@ -4,7 +4,7 @@
 
 #include "stm32f10x.h"
 
-#define CYCLE_LEN 400
+#define CYCLE_LEN 100
 
 
 #define AI1_GPIO_PORT    	GPIOA			              /* GPIO¶Ë¿Ú */

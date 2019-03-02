@@ -698,7 +698,7 @@ I (..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h)(0x5895381A)
 I (..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h)(0x5895381A)
 I (..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h)(0x5895381A)
 I (..\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h)(0x5895381A)
-F (..\User\main.c)(0x5C79F932)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\Libraries\CMSIS -I..\Libraries\STM32F10x_StdPeriph_Driver\inc -I..\User-I F:\SBC\ElectCtl\Project\RTE-I D:\Program\Keil\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0-I D:\Program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (..\User\main.c)(0x5C7A3F6C)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\Libraries\CMSIS -I..\Libraries\STM32F10x_StdPeriph_Driver\inc -I..\User-I F:\SBC\ElectCtl\Project\RTE-I D:\Program\Keil\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0-I D:\Program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (..\Libraries\CMSIS\stm32f10x.h)(0x5895381A)
 I (..\Libraries\CMSIS\core_cm3.h)(0x5895381A)
 I (D:\Program\Keil\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -732,7 +732,7 @@ I (..\User\..\bsp\bsp_led.h)(0x5C526D1F)
 I (..\User\..\bsp\SysTick.h)(0x5BA0C502)
 I (..\User\..\bsp\bsp_exti.h)(0x58953812)
 I (..\User\..\bsp\bsp_innerflash.h)(0x5B6EF4DE)
-I (..\User\..\bsp\adc.h)(0x5C088EAC)
+I (..\User\..\bsp\adc.h)(0x5C7A3922)
 I (..\User\modbus_svr.h)(0x5C07D824)
 I (D:\Program\Keil\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (..\User\SBG_Comm.h)(0x5C087A37)
@@ -955,7 +955,7 @@ I (..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h)(0x5895381A)
 I (..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h)(0x5895381A)
 I (..\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h)(0x5895381A)
 F (..\Bsp\adc.c)(0x5C08831F)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\Libraries\CMSIS -I..\Libraries\STM32F10x_StdPeriph_Driver\inc -I..\User-I F:\SBC\ElectCtl\Project\RTE-I D:\Program\Keil\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0-I D:\Program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD-o .\objects\adc.o --omf_browse .\objects\adc.crf --depend .\objects\adc.d)
-I (..\Bsp\adc.h)(0x5C088EAC)
+I (..\Bsp\adc.h)(0x5C7A3922)
 I (..\Libraries\CMSIS\stm32f10x.h)(0x5895381A)
 I (..\Libraries\CMSIS\core_cm3.h)(0x5895381A)
 I (D:\Program\Keil\ARM\ARMCC\include\stdint.h)(0x5475F300)
