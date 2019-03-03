@@ -23,7 +23,7 @@ void SysTick_Init(void)
 	 * SystemFrequency / 100000	 10us中断一次
 	 * SystemFrequency / 1000000 1us中断一次
 	 */
-	if (SysTick_Config(SystemCoreClock / 1000)) // ST3.5.0库版本
+	if (SysTick_Config(SystemCoreClock / 10000)) // ST3.5.0库版本
 	{
 		while (1)
 			;

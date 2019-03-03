@@ -2,7 +2,7 @@
 .\objects\sbg_comm.o: ..\User\SBG_Comm.h
 .\objects\sbg_comm.o: ..\Libraries\CMSIS\stm32f10x.h
 .\objects\sbg_comm.o: ..\Libraries\CMSIS\core_cm3.h
-.\objects\sbg_comm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\sbg_comm.o: D:\Program\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\sbg_comm.o: ..\Libraries\CMSIS\system_stm32f10x.h
 .\objects\sbg_comm.o: ..\User\stm32f10x_conf.h
 .\objects\sbg_comm.o: ..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h

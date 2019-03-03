@@ -1,9 +1,9 @@
 .\objects\modbus_svr.o: ..\User\Modbus_svr.c
-.\objects\modbus_svr.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\modbus_svr.o: D:\Program\Keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\modbus_svr.o: ..\User\Modbus_svr.h
 .\objects\modbus_svr.o: ..\Libraries\CMSIS\stm32f10x.h
 .\objects\modbus_svr.o: ..\Libraries\CMSIS\core_cm3.h
-.\objects\modbus_svr.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\modbus_svr.o: D:\Program\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\modbus_svr.o: ..\Libraries\CMSIS\system_stm32f10x.h
 .\objects\modbus_svr.o: ..\User\stm32f10x_conf.h
 .\objects\modbus_svr.o: ..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h

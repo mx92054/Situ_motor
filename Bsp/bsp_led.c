@@ -33,7 +33,7 @@ void LED_GPIO_Config(void)
 	GPIO_Init(LED1_GPIO_PORT, &GPIO_InitStructure);
 
 	//--------------Digital Output-------------------------------
-	/*	GPIO_InitStructure.GPIO_Pin = DO_GPIO_PINS ;
+	GPIO_InitStructure.GPIO_Pin = DO_GPIO_PINS ;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(DO_GPIO_PORT,&GPIO_InitStructure);
@@ -45,7 +45,7 @@ void LED_GPIO_Config(void)
 	GPIO_InitStructure.GPIO_Pin = DI_GPIO_PINS ;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-	GPIO_Init(DI_GPIO_PORT,&GPIO_InitStructure);*/
+	GPIO_Init(DI_GPIO_PORT,&GPIO_InitStructure);
 }
 
 /**
